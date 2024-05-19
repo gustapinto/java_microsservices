@@ -5,6 +5,10 @@
             "name": "user"
         },
         {
+            "path": "account",
+            "name": "account"
+        },
+        {
             "path": "."
         }
     ]
