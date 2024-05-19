@@ -1,6 +1,6 @@
-package github.gustapinto.validation;
+package github.gustapinto.common.validation;
 
-import github.gustapinto.exception.NotNullFieldException;
+import github.gustapinto.common.exception.NotNullFieldException;
 
 public class NotBlankValidator {
     public static void validate(String field, String value) throws NotNullFieldException {

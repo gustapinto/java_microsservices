@@ -1,4 +1,4 @@
-package github.gustapinto.exception;
+package github.gustapinto.common.exception;
 
 public class NotBlankFieldException extends IllegalArgumentException {
     public NotBlankFieldException(String field) {
