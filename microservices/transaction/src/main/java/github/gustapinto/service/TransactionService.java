@@ -4,7 +4,12 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+
 import github.gustapinto.common.exception.NotFoundException;
+import github.gustapinto.connector.account.AccountConnector;
+import github.gustapinto.connector.account.dto.GetAccountResponse;
+import github.gustapinto.connector.account.dto.UpdateAccountRequest;
 import github.gustapinto.model.Transaction;
 import io.smallrye.common.constraint.NotNull;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -14,8 +19,16 @@ import jakarta.validation.constraints.NotBlank;
 
 @ApplicationScoped
 public class TransactionService {
+    @RestClient
+    AccountConnector accountConnector;
+
     @Transactional
-    public UUID create(@NotBlank String name, double value, @NotNull UUID userId, @NotNull UUID accountId) throws ConstraintViolationException {
+    public UUID create(@NotBlank String name, double value, @NotNull UUID userId, @NotNull UUID accountId) throws NotFoundException, ConstraintViolationException {
+        var account = accountConnector.getById(userId, accountId);
+        if (account == null) {
+            throw new NotFoundException(GetAccountResponse.class.getName());
+        }
+
         var transaction = new Transaction();
         transaction.name = name;
         transaction.userId = userId;
@@ -23,6 +36,12 @@ public class TransactionService {
         transaction.value = value;
         transaction.createdAt = Instant.now();
         transaction.persist();
+
+        var newAccountCurrentValue = account.currentValue() + value;
+        accountConnector.updateById(userId, accountId, new UpdateAccountRequest(
+            account.name(),
+            newAccountCurrentValue
+        ));
 
         return transaction.id;
     }
