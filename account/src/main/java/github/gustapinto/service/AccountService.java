@@ -5,32 +5,30 @@ import java.util.UUID;
 
 import github.gustapinto.common.exception.NotFoundException;
 import github.gustapinto.model.Account;
-import github.gustapinto.repository.AccountRepository;
+import io.smallrye.common.constraint.NotNull;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.constraints.NotBlank;
 
 @ApplicationScoped
 public class AccountService {
-    @Inject
-    AccountRepository accountRepository;
-
     @Transactional
-    public UUID create(String name, double initialValue, UUID userId) throws IllegalArgumentException {
+    public UUID create(@NotBlank String name, double initialValue, @NotNull UUID userId) throws ConstraintViolationException {
         var account = new Account();
-        account.setName(name);
-        account.setInitialValue(initialValue);
-        account.setCurrentValue(initialValue);
-        account.setUserId(userId);
-        account.setCreatedAt(Instant.now());
-        account.setUpdatedAt(Instant.now());
-        accountRepository.persist(account);
+        account.name = name;
+        account.initialValue = initialValue;
+        account.currentValue = initialValue;
+        account.userId = userId;
+        account.createdAt = Instant.now();
+        account.updatedAt = Instant.now();
+        account.persist();
 
-        return account.getId();
+        return account.id;
     }
 
-    public Account getById(UUID id) throws NotFoundException {
-        var account = accountRepository.findById(id);
+    public Account getById(@NotNull UUID id) throws NotFoundException, ConstraintViolationException {
+        Account account = Account.findById(id);
         if (account == null) {
             throw new NotFoundException(Account.class.getName());
         }
@@ -39,17 +37,17 @@ public class AccountService {
     }
 
     @Transactional
-    public void updateById(UUID id, String name, double currentValue) throws NotFoundException {
+    public void updateById(@NotNull UUID id, @NotBlank String name, double currentValue) throws NotFoundException, ConstraintViolationException {
         var account = this.getById(id);
 
-        account.setName(name);
-        account.setCurrentValue(currentValue);
-        accountRepository.persist(account);
+        account.name = name;
+        account.currentValue = currentValue;
+        account.persist();
     }
 
     @Transactional
-    public void deleteById(UUID id) throws NotFoundException {
-        var found = accountRepository.deleteById(id);
+    public void deleteById(@NotNull UUID id) throws NotFoundException, ConstraintViolationException {
+        var found = Account.deleteById(id);
         if (!found) {
             throw new NotFoundException(Account.class.getName());
         }

@@ -16,13 +16,13 @@ public record GetAccountResponse(
 ) {
     public static GetAccountResponse from(Account account) {
         return new GetAccountResponse(
-            account.getId(),
-            account.getUserId(),
-            account.getName(),
-            account.getInitialValue(),
-            account.getCurrentValue(),
-            account.getCreatedAt(),
-            account.getUpdatedAt()
+            account.id,
+            account.userId,
+            account.name,
+            account.initialValue,
+            account.currentValue,
+            account.createdAt,
+            account.updatedAt
         );
     }
 }

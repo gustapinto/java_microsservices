@@ -1,7 +1,8 @@
 package github.gustapinto.common.provider;
 
 import github.gustapinto.common.dto.response.ErrorResponse;
-import github.gustapinto.common.exception.NotFoundException;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.ext.ExceptionMapper;
@@ -14,6 +15,7 @@ public class ExceptionProvider implements ExceptionMapper<Throwable> {
         Status code = switch (e) {
             case NotFoundException nfe -> Status.NOT_FOUND;
             case IllegalArgumentException iae -> Status.BAD_REQUEST;
+            case ConstraintViolationException cve -> Status.BAD_REQUEST;
             default -> Status.INTERNAL_SERVER_ERROR;
         };
 
