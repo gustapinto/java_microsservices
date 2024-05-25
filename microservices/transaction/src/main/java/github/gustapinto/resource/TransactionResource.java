@@ -14,29 +14,30 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
+@Path("/v1")
 public class TransactionResource {
     @Inject
     TransactionService transactionService;
 
     @POST
-    @Path("/v1/users/{userId}/accounts/{accountId}/transactions")
-    public Response create(CreateTransactionRequest req) {
-        var id = transactionService.create(req.name(), req.value(), req.userId(), req.accountId());
+    @Path("/users/{userId}/accounts/{accountId}/transactions")
+    public Response create(UUID userId, UUID accountId, CreateTransactionRequest req) {
+        var id = transactionService.create(req.name(), req.value(), userId, accountId);
         var res = new CreatedResponse(id);
 
         return Response.status(Status.CREATED).entity(res).build();
     }
 
     @DELETE
-    @Path("/v1/users/{userId}/accounts/{accountId}/transactions/{transactionId}")
+    @Path("/users/{userId}/accounts/{accountId}/transactions/{transactionId}")
     public Response delete(UUID userId, UUID accountId, UUID transactionId) {
-        transactionService.deleteById(userId, accountId, transactionId);
+        transactionService.deleteById(transactionId, userId, accountId);
 
         return Response.noContent().build();
     }
 
     @GET
-    @Path("/v1/users/{userId}/accounts/{accountId}/transactions")
+    @Path("/users/{userId}/accounts/{accountId}/transactions")
     public Response getAll(UUID userId, UUID accountId) {
         var transactions = transactionService.getAll(userId, accountId);
         var res = GetTransactionResponse.from(transactions);
@@ -45,8 +46,8 @@ public class TransactionResource {
     }
 
     @GET
-    @Path("/v1/users/{userId}/accounts/{accountId}/transactions/{transactionId}")
-    public Response get(UUID userId, UUID accountId, UUID transactionId) {
+    @Path("/users/{userId}/accounts/{accountId}/transactions/{transactionId}")
+    public Response getById(UUID userId, UUID accountId, UUID transactionId) {
         var transaction = transactionService.getById(transactionId, userId, accountId);
         var res = GetTransactionResponse.from(transaction);
 

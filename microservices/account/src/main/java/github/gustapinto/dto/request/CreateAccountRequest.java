@@ -1,10 +1,12 @@
 package github.gustapinto.dto.request;
 
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record CreateAccountRequest(
+    @JsonProperty("name")
     String name,
-    double initialValue,
-    UUID userId
+
+    @JsonProperty("initial_value")
+    double initialValue
 ) {
 }

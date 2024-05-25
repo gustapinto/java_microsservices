@@ -27,22 +27,22 @@ public class TransactionService {
         return transaction.id;
     }
 
-    public List<Transaction> getAll(@NotNull UUID userId, @NotNull UUID accountId) throws NotFoundException, ConstraintViolationException {
-        List<Transaction> transaction = Transaction.list(
-                "user_id = ?2 and account_id = ?3",
+    public List<Transaction> getAll(@NotNull UUID userId, @NotNull UUID accountId) throws ConstraintViolationException {
+        List<Transaction> transactions = Transaction.list(
+                "userId = ?1 and accountId = ?2",
                 userId,
                 accountId
             );
-        if (transaction == null) {
-            throw new NotFoundException(Transaction.class.getName());
+        if (transactions == null) {
+            return List.of();
         }
 
-        return transaction;
+        return transactions;
     }
 
     public Transaction getById(@NotNull UUID id, @NotNull UUID userId, @NotNull UUID accountId) throws NotFoundException, ConstraintViolationException {
         Transaction transaction = Transaction.find(
-                "id = ?1 and user_id = ?2 and account_id = ?3",
+                "id = ?1 and userId = ?2 and accountId = ?3",
                 id,
                 userId,
                 accountId
@@ -57,14 +57,6 @@ public class TransactionService {
 
     @Transactional
     public void deleteById(@NotNull UUID id, @NotNull UUID userId, @NotNull UUID accountId) throws NotFoundException, ConstraintViolationException {
-        var deleted = Transaction.delete(
-            "id = ?1 and user_id = ?2 and account_id = ?3",
-            id,
-            userId,
-            accountId
-        );
-        if (deleted == 0) {
-            throw new NotFoundException(Transaction.class.getName());
-        }
+        getById(id, userId, accountId).delete();
     }
 }

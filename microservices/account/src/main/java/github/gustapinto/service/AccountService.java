@@ -1,6 +1,7 @@
 package github.gustapinto.service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 import github.gustapinto.common.exception.NotFoundException;
@@ -27,8 +28,22 @@ public class AccountService {
         return account.id;
     }
 
-    public Account getById(@NotNull UUID id) throws NotFoundException, ConstraintViolationException {
-        Account account = Account.findById(id);
+    public List<Account> getAll(@NotNull UUID userId) throws ConstraintViolationException {
+        List<Account> accounts = Account.list("userId", userId);
+        if (accounts == null) {
+            return List.of();
+        }
+
+        return accounts;
+    }
+
+    public Account getById(@NotNull UUID id, @NotNull UUID userId) throws NotFoundException, ConstraintViolationException {
+        Account account = Account.find(
+                "id = ?1 and userId = ?2",
+                id,
+                userId
+            )
+            .firstResult();
         if (account == null) {
             throw new NotFoundException(Account.class.getName());
         }
@@ -37,8 +52,8 @@ public class AccountService {
     }
 
     @Transactional
-    public void updateById(@NotNull UUID id, @NotBlank String name, double currentValue) throws NotFoundException, ConstraintViolationException {
-        var account = this.getById(id);
+    public void updateById(@NotNull UUID id, @NotNull UUID userId, @NotBlank String name, double currentValue) throws NotFoundException, ConstraintViolationException {
+        var account = this.getById(id, userId);
 
         account.name = name;
         account.currentValue = currentValue;
@@ -46,10 +61,7 @@ public class AccountService {
     }
 
     @Transactional
-    public void deleteById(@NotNull UUID id) throws NotFoundException, ConstraintViolationException {
-        var found = Account.deleteById(id);
-        if (!found) {
-            throw new NotFoundException(Account.class.getName());
-        }
+    public void deleteById(@NotNull UUID id, @NotNull UUID userId) throws NotFoundException, ConstraintViolationException {
+        getById(id, userId).delete();
     }
 }

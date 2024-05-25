@@ -1,7 +1,6 @@
 package github.gustapinto.resource;
-
 import static io.restassured.RestAssured.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.UUID;
 
@@ -13,9 +12,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-import github.gustapinto.dto.request.CreateAccountRequest;
-import github.gustapinto.dto.request.UpdateAccountRequest;
-import github.gustapinto.dto.response.GetAccountResponse;
+import github.gustapinto.dto.request.CreateTransactionRequest;
+import github.gustapinto.dto.response.GetTransactionResponse;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
@@ -23,11 +21,15 @@ import io.restassured.http.ContentType;
 @QuarkusTest
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
-public class AccountResourceTest {
+public class TransactionResourceTest {
     static String id;
+    static UUID userId;
+
+    static final String MOCKED_USER_ID = "678a9b31-9ae1-4a51-8233-536543ac25a0";
+    static final String MOCKED_ACCOUNT_ID = "7ed30d36-bc99-4e9d-a390-d0b3630fdefb";
 
     String baseUrl() {
-        return "/v1/accounts";
+        return String.format("/v1/users/%s/accounts/%s/transactions", MOCKED_USER_ID, MOCKED_ACCOUNT_ID);
     }
 
     String baseUrlWithId() {
@@ -36,11 +38,10 @@ public class AccountResourceTest {
 
     @Test
     @Order(1)
-    void shouldCreateUser() {
-        var body = new CreateAccountRequest(
+    void shouldCreateTransaction() {
+        var body = new CreateTransactionRequest(
             "foo",
-            10,
-            UUID.fromString("ecdd88d1-45c8-4ddd-a739-0adad93c008d")
+            10
         );
         id = given()
             .contentType(ContentType.JSON)
@@ -56,58 +57,39 @@ public class AccountResourceTest {
 
     @Test
     @Order(2)
-    void shouldGetUserAfterCreate() {
+    void shouldGetTransactionByIdAfterCreate() {
         var res = when()
             .get(baseUrlWithId())
             .then()
             .statusCode(HttpStatus.SC_OK)
             .extract()
-            .as(GetAccountResponse.class);
+            .as(GetTransactionResponse.class);
 
         assertEquals(res.id().toString(), id);
+        assertEquals(res.userId().toString(), MOCKED_USER_ID);
+        assertEquals(res.accountId().toString(), MOCKED_ACCOUNT_ID);
         assertEquals(res.name(), "foo");
-        assertEquals(res.initialValue(), 10);
-        assertEquals(res.currentValue(), 10);
-        assertEquals(res.userId().toString(), "ecdd88d1-45c8-4ddd-a739-0adad93c008d");
+        assertEquals(res.value(), 10);
+        assertNotNull(res.createdAt());
     }
 
     @Test
     @Order(3)
-    void shouldUpdateUser() {
-        var body = new UpdateAccountRequest(
-            "foobar",
-            15
-        );
-        given()
-            .contentType(ContentType.JSON)
-            .body(body)
-            .when()
-            .put(baseUrlWithId())
+    void shouldGetAllAfterCreate() {
+        var res = when()
+            .get(baseUrl())
             .then()
-            .statusCode(HttpStatus.SC_NO_CONTENT);
+            .statusCode(HttpStatus.SC_OK)
+            .extract()
+            .as(GetTransactionResponse[].class);
+
+        assertNotNull(res);
+        assertTrue(res.length > 0);
     }
 
     @Test
     @Order(4)
-    void shouldGetUserAfterUpdate() {
-        var res = when()
-            .get(baseUrlWithId())
-            .then()
-            .statusCode(HttpStatus.SC_OK)
-            .extract()
-            .as(GetAccountResponse.class);
-
-        assertEquals(res.id().toString(), id);
-        assertEquals(res.name(), "foobar");
-        assertEquals(res.initialValue(), 10);
-        assertEquals(res.currentValue(), 15);
-        assertEquals(res.userId().toString(), "ecdd88d1-45c8-4ddd-a739-0adad93c008d");
-
-    }
-
-    @Test
-    @Order(5)
-    void shouldDeleteUser() {
+    void shouldDeleteTransaction() {
         when()
             .delete(baseUrlWithId())
             .then()
@@ -115,8 +97,8 @@ public class AccountResourceTest {
     }
 
     @Test
-    @Order(6)
-    void shouldNotGetUserAfterDelete() {
+    @Order(5)
+    void shouldNotGetTransactionByIdAfterDelete() {
         when()
             .get(baseUrlWithId())
             .then()

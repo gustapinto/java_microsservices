@@ -28,7 +28,7 @@ public class Transaction extends PanacheEntityBase {
     @Column(name = "name")
     public String name;
 
-    @Column(name = "value")
+    @Column(name = "`value`")
     public double value;
 
     @Column(name = "created_at")

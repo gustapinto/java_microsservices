@@ -2,8 +2,8 @@ package github.gustapinto.resource;
 
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.UUID;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Order;
@@ -26,8 +26,10 @@ import io.restassured.http.ContentType;
 public class AccountResourceTest {
     static String id;
 
+    static final String MOCKED_USER_ID = "678a9b31-9ae1-4a51-8233-536543ac25a0";
+
     String baseUrl() {
-        return "/v1/accounts";
+        return String.format("/v1/users/%s/accounts", MOCKED_USER_ID);
     }
 
     String baseUrlWithId() {
@@ -39,8 +41,7 @@ public class AccountResourceTest {
     void shouldCreateUser() {
         var body = new CreateAccountRequest(
             "foo",
-            10,
-            UUID.fromString("ecdd88d1-45c8-4ddd-a739-0adad93c008d")
+            10
         );
         id = given()
             .contentType(ContentType.JSON)
@@ -68,7 +69,7 @@ public class AccountResourceTest {
         assertEquals(res.name(), "foo");
         assertEquals(res.initialValue(), 10);
         assertEquals(res.currentValue(), 10);
-        assertEquals(res.userId().toString(), "ecdd88d1-45c8-4ddd-a739-0adad93c008d");
+        assertEquals(res.userId().toString(), MOCKED_USER_ID);
     }
 
     @Test
@@ -101,12 +102,25 @@ public class AccountResourceTest {
         assertEquals(res.name(), "foobar");
         assertEquals(res.initialValue(), 10);
         assertEquals(res.currentValue(), 15);
-        assertEquals(res.userId().toString(), "ecdd88d1-45c8-4ddd-a739-0adad93c008d");
-
+        assertEquals(res.userId().toString(), MOCKED_USER_ID);
     }
 
     @Test
     @Order(5)
+    void shouldGetAllUserAfterUpdate() {
+        var res = when()
+            .get(baseUrl())
+            .then()
+            .statusCode(HttpStatus.SC_OK)
+            .extract()
+            .as(GetAccountResponse[].class);
+
+        assertNotNull(res);
+        assertTrue(res.length > 0);
+    }
+
+    @Test
+    @Order(6)
     void shouldDeleteUser() {
         when()
             .delete(baseUrlWithId())
@@ -115,7 +129,7 @@ public class AccountResourceTest {
     }
 
     @Test
-    @Order(6)
+    @Order(7)
     void shouldNotGetUserAfterDelete() {
         when()
             .get(baseUrlWithId())

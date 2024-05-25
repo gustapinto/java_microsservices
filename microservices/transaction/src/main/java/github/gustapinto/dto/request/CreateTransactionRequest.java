@@ -1,7 +1,5 @@
 package github.gustapinto.dto.request;
 
-import java.util.UUID;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record CreateTransactionRequest(
@@ -9,12 +7,6 @@ public record CreateTransactionRequest(
     String name,
 
     @JsonProperty("value")
-    double value,
-
-    @JsonProperty("user_id")
-    UUID userId,
-
-    @JsonProperty("account_id")
-    UUID accountId
+    double value
 ) {
 }
