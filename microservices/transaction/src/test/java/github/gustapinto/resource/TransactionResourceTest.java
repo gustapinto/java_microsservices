@@ -1,10 +1,12 @@
 package github.gustapinto.resource;
-import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static io.restassured.RestAssured.*;
 
 import java.util.UUID;
 
 import org.apache.http.HttpStatus;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -12,6 +14,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+import github.gustapinto.connector.account.AccountConnector;
+import github.gustapinto.connector.account.dto.CreateAccountRequest;
 import github.gustapinto.dto.request.CreateTransactionRequest;
 import github.gustapinto.dto.response.GetTransactionResponse;
 import io.quarkus.test.junit.QuarkusTest;
@@ -22,14 +26,17 @@ import io.restassured.http.ContentType;
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 public class TransactionResourceTest {
+    @RestClient
+    AccountConnector accountConnector;
+
     static String id;
+    static String accountId;
     static UUID userId;
 
     static final String MOCKED_USER_ID = "678a9b31-9ae1-4a51-8233-536543ac25a0";
-    static final String MOCKED_ACCOUNT_ID = "7ed30d36-bc99-4e9d-a390-d0b3630fdefb";
 
     String baseUrl() {
-        return String.format("/v1/users/%s/accounts/%s/transactions", MOCKED_USER_ID, MOCKED_ACCOUNT_ID);
+        return String.format("/v1/users/%s/accounts/%s/transactions", MOCKED_USER_ID, accountId);
     }
 
     String baseUrlWithId() {
@@ -39,6 +46,12 @@ public class TransactionResourceTest {
     @Test
     @Order(1)
     void shouldCreateTransaction() {
+        var res = accountConnector.create(
+            UUID.fromString(MOCKED_USER_ID),
+            new CreateAccountRequest("foo", 10)
+        );
+        accountId = res.id().toString();
+
         var body = new CreateTransactionRequest(
             "foo",
             10
@@ -67,7 +80,7 @@ public class TransactionResourceTest {
 
         assertEquals(res.id().toString(), id);
         assertEquals(res.userId().toString(), MOCKED_USER_ID);
-        assertEquals(res.accountId().toString(), MOCKED_ACCOUNT_ID);
+        assertEquals(res.accountId().toString(), accountId);
         assertEquals(res.name(), "foo");
         assertEquals(res.value(), 10);
         assertNotNull(res.createdAt());

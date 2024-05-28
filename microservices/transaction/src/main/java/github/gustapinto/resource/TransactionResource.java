@@ -14,13 +14,13 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
-@Path("/v1")
+@Path("")
 public class TransactionResource {
     @Inject
     TransactionService transactionService;
 
     @POST
-    @Path("/users/{userId}/accounts/{accountId}/transactions")
+    @Path("/v1/users/{userId}/accounts/{accountId}/transactions")
     public Response create(UUID userId, UUID accountId, CreateTransactionRequest req) {
         var id = transactionService.create(req.name(), req.value(), userId, accountId);
         var res = new CreatedResponse(id);
@@ -29,7 +29,7 @@ public class TransactionResource {
     }
 
     @DELETE
-    @Path("/users/{userId}/accounts/{accountId}/transactions/{transactionId}")
+    @Path("/v1/users/{userId}/accounts/{accountId}/transactions/{transactionId}")
     public Response delete(UUID userId, UUID accountId, UUID transactionId) {
         transactionService.deleteById(transactionId, userId, accountId);
 
@@ -37,7 +37,7 @@ public class TransactionResource {
     }
 
     @GET
-    @Path("/users/{userId}/accounts/{accountId}/transactions")
+    @Path("/v1/users/{userId}/accounts/{accountId}/transactions")
     public Response getAll(UUID userId, UUID accountId) {
         var transactions = transactionService.getAll(userId, accountId);
         var res = GetTransactionResponse.from(transactions);
@@ -46,7 +46,7 @@ public class TransactionResource {
     }
 
     @GET
-    @Path("/users/{userId}/accounts/{accountId}/transactions/{transactionId}")
+    @Path("/v1/users/{userId}/accounts/{accountId}/transactions/{transactionId}")
     public Response getById(UUID userId, UUID accountId, UUID transactionId) {
         var transaction = transactionService.getById(transactionId, userId, accountId);
         var res = GetTransactionResponse.from(transaction);
