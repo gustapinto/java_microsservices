@@ -53,13 +53,4 @@ public class UserService {
             throw new NotFoundException(User.class.getName());
         }
     }
-
-    public boolean isPasswordValidForEmail(String email, String password) throws NotFoundException {
-        var user = userRepository.find("email", email).firstResult();
-        if (user == null) {
-            throw new NotFoundException(User.class.getName());
-        }
-
-        return BcryptUtil.matches(password, user.getPassword());
-    }
 }
