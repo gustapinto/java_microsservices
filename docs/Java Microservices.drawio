@@ -1,56 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mxfile host="app.diagrams.net" modified="2024-05-25T15:21:03.372Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="Wr-2vQ_R3rjUQzoV86sa" version="24.4.8" type="google">
-  <diagram name="Página-1" id="wyG1_XZOK64VyqssJD78">
-    <mxGraphModel dx="978" dy="1389" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-1" target="Dey9jI3-ztKfG_yNGH6g-3" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-1" target="Dey9jI3-ztKfG_yNGH6g-2" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-1" target="Dey9jI3-ztKfG_yNGH6g-4" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-1" value="Backend For Frontend&#xa;" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://pt.quarkus.io/assets/images/brand/quarkus_icon_default.svg;" parent="1" vertex="1">
-          <mxGeometry x="120" y="160" width="110" height="110" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-2" value="Microsserviço Usuários&#xa;" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://pt.quarkus.io/assets/images/brand/quarkus_icon_default.svg;" parent="1" vertex="1">
-          <mxGeometry x="414" y="-40" width="110" height="110" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-3" value="Microsserviço Contas&#xa;&#xa;" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://pt.quarkus.io/assets/images/brand/quarkus_icon_default.svg;" parent="1" vertex="1">
-          <mxGeometry x="414" y="160" width="110" height="110" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-4" value="Microsserviço Transações&#xa;&#xa;" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://pt.quarkus.io/assets/images/brand/quarkus_icon_default.svg;" parent="1" vertex="1">
-          <mxGeometry x="414" y="360" width="110" height="110" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-9" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="610" y="-36.25" width="80" height="102.5" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-2" target="Dey9jI3-ztKfG_yNGH6g-9" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-11" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="610" y="163.75" width="80" height="102.5" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-3" target="Dey9jI3-ztKfG_yNGH6g-11" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-13" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="610" y="363.75" width="80" height="102.5" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-4" target="Dey9jI3-ztKfG_yNGH6g-13" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="Dey9jI3-ztKfG_yNGH6g-17" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-4" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="444" y="340" as="sourcePoint" />
-            <mxPoint x="470" y="290" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
+<mxfile host="65bd71144e">
+    <diagram name="Página-1" id="wyG1_XZOK64VyqssJD78">
+        <mxGraphModel dx="576" dy="1345" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-1" target="Dey9jI3-ztKfG_yNGH6g-3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-7" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;jumpStyle=none;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-1" target="Dey9jI3-ztKfG_yNGH6g-2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-1" target="Dey9jI3-ztKfG_yNGH6g-4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-1" value="Gateway" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://pt.quarkus.io/assets/images/brand/quarkus_icon_default.svg;" parent="1" vertex="1">
+                    <mxGeometry x="120" y="160" width="110" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-2" value="Users Microservice" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://pt.quarkus.io/assets/images/brand/quarkus_icon_default.svg;" parent="1" vertex="1">
+                    <mxGeometry x="414" y="-40" width="110" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-3" value="Accounts Microservice" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://pt.quarkus.io/assets/images/brand/quarkus_icon_default.svg;" parent="1" vertex="1">
+                    <mxGeometry x="414" y="160" width="110" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-4" value="Transaction Microservices" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://pt.quarkus.io/assets/images/brand/quarkus_icon_default.svg;" parent="1" vertex="1">
+                    <mxGeometry x="414" y="360" width="110" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-9" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="610" y="-36.25" width="80" height="102.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-2" target="Dey9jI3-ztKfG_yNGH6g-9" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-11" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="610" y="163.75" width="80" height="102.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-3" target="Dey9jI3-ztKfG_yNGH6g-11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-13" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" parent="1" vertex="1">
+                    <mxGeometry x="610" y="363.75" width="80" height="102.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-4" target="Dey9jI3-ztKfG_yNGH6g-13" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Dey9jI3-ztKfG_yNGH6g-17" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="Dey9jI3-ztKfG_yNGH6g-4" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="444" y="340" as="sourcePoint"/>
+                        <mxPoint x="470" y="290" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
 </mxfile>
