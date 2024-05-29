@@ -43,7 +43,7 @@ public class AuthResourceTest {
             .contentType(ContentType.JSON)
             .body(body)
             .when()
-            .post("/v1/login")
+            .post("/v1/auth/login")
             .then()
             .statusCode(HttpStatus.SC_OK)
             .extract()
