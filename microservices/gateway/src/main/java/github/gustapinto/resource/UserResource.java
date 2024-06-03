@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.eclipse.microprofile.jwt.Claim;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import github.gustapinto.common.dto.response.CreatedResponse;
 import github.gustapinto.connector.user.UserConnector;
 import github.gustapinto.connector.user.dto.CreateUserRequest;
 import github.gustapinto.connector.user.dto.LoginRequest;
@@ -38,16 +37,17 @@ public class UserResource {
     @Path("/v1/users")
     public Response create(CreateUserRequest request) {
         var createdResponse = userConnector.create(request);
-        var res = new CreatedResponse(createdResponse.id());
+        var user = userConnector.getById(createdResponse.id());
 
-        return Response.status(Status.CREATED).entity(res).build();
+        return Response.status(Status.CREATED).entity(user).build();
     }
 
     @PUT
     @Path("/v1/users/{userId}")
     public Response update(UUID userId, UpdateUserRequest request) {
         userConnector.update(userId, request);
+        var user = userConnector.getById(userId);
 
-        return Response.noContent().build();
+        return Response.ok(user).build();
     }
 }

@@ -6,9 +6,11 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import github.gustapinto.common.dto.response.CreatedResponse;
 import github.gustapinto.connector.user.dto.CreateUserRequest;
+import github.gustapinto.connector.user.dto.GetUserResponse;
 import github.gustapinto.connector.user.dto.LoginRequest;
 import github.gustapinto.connector.user.dto.LoginResponse;
 import github.gustapinto.connector.user.dto.UpdateUserRequest;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -23,6 +25,10 @@ public interface UserConnector {
     @PUT
     @Path("/v1/users/{userId}")
     void update(@PathParam("userId") UUID userId, UpdateUserRequest request);
+
+    @GET
+    @Path("/v1/users/{userId}")
+    GetUserResponse getById(@PathParam("userId") UUID userId);
 
     @POST
     @Path("/v1/auth/login")
